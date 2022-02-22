@@ -14,25 +14,22 @@ class UserInterface(object):
 
     def start_top_engrams(self):
         print("Желаете самостоятельно ввести значения N и K? (Y/AnyKey)")
-        if input() == "Y":
-            print("Введите N: ")
-            n = int(input())
-            print("Введите K: ")
-            k = int(input())
+        if input("Ваш ответ: ") == "Y":
+            n = int(input("Введите N: "))
+            k = int(input("Введите K: "))
             print(self.text_in_proc.top_engrams(self.text_in_proc, k, n))
         else:
             print("Запускаем функцию со стандартными параметрами: K = 10, N = 4")
             print(self.text_in_proc.top_engrams(self.text_in_proc, 10, 4))
 
     def start_interface(self):
-        print("Введите текст: ")
-        self.original_text = input()
+        self.original_text = input("Введите текст: ")
         self.text_in_proc.text = self.original_text
         while True:
             os.system('cls||clear')
             print("Выберите действие:\n1. Статистика по словам\n2. Среднее и медианное количество слов в предложении"
                   "\n3. Топ n-грам\n4. Получить рабочую строку\n5. Выйти")
-            choose = input()
+            choose = input("Ваш выбор: ")
             match choose:
                 case "1":
                     os.system('cls||clear')
