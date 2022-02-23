@@ -1,5 +1,6 @@
-import UIModule
+from ui_module import UserInterface
+
 
 if __name__ == '__main__':
-    interface = UIModule.UserInterface
-    interface.start_interface(interface)
+    interface = UserInterface()
+    interface.start_interface()

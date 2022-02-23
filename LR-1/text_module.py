@@ -2,10 +2,25 @@ import string
 import re
 
 
-class WorkWithText(object):
-    text = ""
+class WorkWithText:
+    """Класс для работы с текстом"""
+    def __init__(self) -> None:
+        """
+            Конструктор класса.
 
-    def word_count(self):
+            Создает:
+                text - рабочая строка.
+                :type text_in_proc: str
+        """
+        self.text = ""
+
+    def word_count(self) -> str:
+        """
+            Метод подсчета повторений слов в тектсе.
+
+            :rtype: str
+            :return: Возвращает строку, в которой перечислены все используемые слова и количество их повторений.
+        """
         self.text = self.text.lower()
         tuple_text = self.text.translate(self.text.maketrans('', '', string.punctuation)).split()
         dict_text = dict((word, tuple_text.count(word)) for word in set(tuple_text) if tuple_text.count(word) >= 1)
@@ -14,7 +29,14 @@ class WorkWithText(object):
             result = result + f"\n{i} -- {dict_text[i]}"
         return result
 
-    def average_words(self):
+    def average_words(self) -> str:
+        """
+            Метод нахождения среднего и медианного количества слов в предложениях.
+
+            :rtype: str
+            :return: Возвращает строку со значениями среднего и медианного количества слов в предложениях и пояснения к этим
+            значениям.
+        """
         self.text = self.text.lower()
         tuple_text = re.split(r"[!?.]\s*", self.text)
         tuple_text = [value for value in tuple_text if value != ""]
@@ -30,10 +52,23 @@ class WorkWithText(object):
             med_count = (sent_count[int((len(sent_count)) / 2)] + sent_count[int((len(sent_count)) / 2) - 1]) / 2
         else:
             med_count = sent_count[int((len(sent_count)) / 2)]
-        return f"Среднее количество слов в предложениях: {average / len(sent_count)}\nМедианное количество слов в предло" \
-               f"жениях: {med_count}"
+        return f"Среднее количество слов в предложениях: {average / len(sent_count)}\nМедианное количество слов в " \
+               f"предложениях: {med_count}"
 
-    def top_engrams(self, k, n):
+    def top_engrams(self, k: int, n: int) -> str:
+        """
+            Метод составления k-топа из n-грам.
+
+            :param n: длина обрабатываемого n-грама
+            :type n: int
+
+            :param k: количество выводимых в топе значений
+            :type k: int
+
+            :rtype: str
+            :return: Возвращает строку со значениями среднего и медианного количества слов в предложениях и пояснения к этим
+            значениям.
+        """
         self.text = self.text.lower()
         tuple_text = self.text.translate(self.text.maketrans('', '', string.punctuation)).replace(' ', '')
         if n >= len(tuple_text) or n <= 0:
