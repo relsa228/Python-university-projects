@@ -25,8 +25,13 @@ class WorkWithText(object):
             sent_count.append(len(sent))
         for i in sent_count:
             average = average + i
-        return f"Среднее количество слов в предложениях: {average/len(sent_count)}\nМедианное количество слов в предло" \
-                 f"жениях: {(len(sent_count)+1)/2}"
+        sent_count.sort()
+        if len(sent_count) % 2 == 0:
+            med_count = (sent_count[int((len(sent_count)) / 2)] + sent_count[int((len(sent_count)) / 2) - 1]) / 2
+        else:
+            med_count = sent_count[int((len(sent_count)) / 2)]
+        return f"Среднее количество слов в предложениях: {average / len(sent_count)}\nМедианное количество слов в предло" \
+               f"жениях: {med_count}"
 
     def top_engrams(self, k, n):
         self.text = self.text.lower()
@@ -44,9 +49,6 @@ class WorkWithText(object):
         if k >= len(sorted_tuple) or k <= 0:
             return "\nОшибка ввода. Неверное значение K."
         result = "Заданный k-топ n-грам:"
-        for i in range(len(sorted_tuple)-1, len(sorted_tuple) - k - 1, -1):
+        for i in range(len(sorted_tuple) - 1, len(sorted_tuple) - k - 1, -1):
             result = result + f"\n{sorted_tuple[i]}"
         return result
-
-
-
