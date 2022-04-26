@@ -17,14 +17,14 @@ class AbstractSerializer:
         pass
 
     @abstractmethod
-    def load(self, file_path: str) -> bool:
+    def load(self, file_path: str) -> all:
         """
         Десериализует Python объект из файла
         """
         pass
 
     @abstractmethod
-    def loads(self, target_item) -> str:
+    def loads(self, target_item) -> all:
         """
         Десериализует Python объект из строки
         """

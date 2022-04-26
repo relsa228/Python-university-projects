@@ -1,4 +1,5 @@
 from work_modules.yaml_serialize_module import YamlSerializer
+from work_modules.toml_serialize_module import TomlSerializer
 
 
 trunk_template = [
@@ -12,7 +13,11 @@ access_template = [
     'spanning-tree bpduguard enable'
 ]
 
-to_yaml = {'trunk': trunk_template, 'access': access_template}
+to_toml = {'trunk': trunk_template, 'access': access_template}
 
-ys = YamlSerializer
-print(ys.dumps(to_yaml))
+ts = TomlSerializer()
+print(ts.dumps(to_toml))
+print(ts.loads(ts.dumps(to_toml)))
+
+ts.dump(to_toml, "jcd.toml")
+print(ts.load("jcd.toml"))
