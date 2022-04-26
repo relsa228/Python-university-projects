@@ -1,4 +1,4 @@
-from lib.yaml_serialize_module import YamlSerializer
+from work_modules.yaml_serialize_module import YamlSerializer
 
 
 trunk_template = [
