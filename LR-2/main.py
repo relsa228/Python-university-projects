@@ -1,16 +1,18 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from lib.yaml_serialize_module import YamlSerializer
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+trunk_template = [
+    'switchport trunk encapsulation dot1q', 'switchport mode trunk',
+    'switchport trunk native vlan 999', 'switchport trunk allowed vlan'
+]
 
+access_template = [
+    'switchport mode access', 'switchport access vlan',
+    'switchport nonegotiate', 'spanning-tree portfast',
+    'spanning-tree bpduguard enable'
+]
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+to_yaml = {'trunk': trunk_template, 'access': access_template}
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+ys = YamlSerializer
+print(ys.dumps(to_yaml))
