@@ -1,23 +1,20 @@
-from work_modules.yaml_serialize_module import YamlSerializer
-from work_modules.toml_serialize_module import TomlSerializer
+import ast
+import inspect
+
+import math
 
 
-trunk_template = [
-    'switchport trunk encapsulation dot1q', 'switchport mode trunk',
-    'switchport trunk native vlan 999', 'switchport trunk allowed vlan'
-]
+def _t(arg):
+    c = 2
 
-access_template = [
-    'switchport mode access', 'switchport access vlan',
-    'switchport nonegotiate', 'spanning-tree portfast',
-    'spanning-tree bpduguard enable'
-]
+    def _f():
+        a = 123
+        return math.sin(arg * a * c * d)
 
-to_toml = {'trunk': trunk_template, 'access': access_template}
+    return _f()
 
-ts = TomlSerializer()
-print(ts.dumps(to_toml))
-print(ts.loads(ts.dumps(to_toml)))
 
-ts.dump(to_toml, "jcd.toml")
-print(ts.load("jcd.toml"))
+d = inspect.getsource(_t)
+
+my_tree = ast.parse(d)
+print(ast.dump(my_tree, indent=4))
