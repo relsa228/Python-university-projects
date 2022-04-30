@@ -15,6 +15,9 @@ def _t(arg):
 
 
 d = inspect.getsource(_t)
-
 my_tree = ast.parse(d)
-print(ast.dump(my_tree, indent=4))
+ss = ast.Module(my_tree)
+sd = ast.unparse(my_tree)
+print(sd)
+ff = 1
+
