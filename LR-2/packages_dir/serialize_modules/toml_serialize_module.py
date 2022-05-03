@@ -2,6 +2,7 @@ import toml
 
 from packages_dir.serialize_modules.abstractserializer import AbstractSerializer
 from packages_dir.tools_modules.def_dict_form_module import serialize_to_dict
+from packages_dir.tools_modules.def_dict_form_module import deserialize_from_dict
 
 
 class TomlSerializer(AbstractSerializer):
@@ -15,7 +16,10 @@ class TomlSerializer(AbstractSerializer):
 
     def load(self, file_path: str) -> all:
         with open(file_path, 'r+') as file:
-            return toml.load(file)
+            wrk_str = toml.load(file)
+            file.close()
+        return deserialize_from_dict(wrk_str)
 
-    def loads(self, target_item) -> all:
-        return toml.loads(target_item)
+    def loads(self, target_str) -> all:
+        wrk_str = toml.loads(target_str)
+        return deserialize_from_dict(wrk_str)

@@ -2,6 +2,7 @@ import yaml
 
 from packages_dir.serialize_modules.abstractserializer import AbstractSerializer
 from packages_dir.tools_modules.def_dict_form_module import serialize_to_dict
+from packages_dir.tools_modules.def_dict_form_module import deserialize_from_dict
 
 
 class YamlSerializer(AbstractSerializer):
@@ -15,9 +16,11 @@ class YamlSerializer(AbstractSerializer):
 
     def load(self, file_path: str) -> all:
         with open(file_path, 'r+') as file:
-            load_str = file.read()
+            wrk_str = file.read()
+            wrk_str = yaml.safe_load(wrk_str)
             file.close()
-            return yaml.safe_load(load_str)
+        return deserialize_from_dict(wrk_str)
 
-    def loads(self, target_item) -> all:
-        return yaml.safe_load(target_item)
+    def loads(self, target_str) -> all:
+        wrk_str = yaml.safe_load(target_str)
+        return deserialize_from_dict(wrk_str)

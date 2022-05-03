@@ -24,7 +24,7 @@ class AbstractSerializer:
         pass
 
     @abstractmethod
-    def loads(self, target_item) -> all:
+    def loads(self, target_str) -> all:
         """
         Десериализует Python объект из строки
         """

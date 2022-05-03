@@ -68,3 +68,33 @@ def serialize_to_dict(obj: object) -> dict:
             result[class_member[0]] = serialize_to_dict(class_member[1])
 
     return result
+
+
+def deserialize_from_dict(incoming_dict: dict) -> object:
+    if 'type' in incoming_dict and incoming_dict['type'] == 'list':
+        out_list = list()
+
+        for item in incoming_dict.items():
+            if 'value' in item[1]:
+                out_list.append(type(item[1]['type'])(item[1]['value']))
+
+        return out_list
+    elif 'type' in incoming_dict and incoming_dict['type'] == 'tuple':
+        out_tuple = tuple()
+
+        for item in incoming_dict.items():
+            if 'value' in item[1]:
+                out_tuple = list(out_tuple)
+                out_tuple.append(type(item[1]['type'])(item[1]['value']))
+                out_tuple = tuple(out_tuple)
+
+        return out_tuple
+
+    else:
+        else_dict = dict()
+
+        for item in incoming_dict.items():
+            if type(item[1]) == dict and 'value' in item[1]:
+                else_dict[item[0]] = item[1]['value']
+
+        return else_dict
