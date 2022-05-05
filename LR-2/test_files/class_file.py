@@ -1,4 +1,4 @@
-class TestClass:
+class TestClassS:
     def __init__(self):
         self.s = "d"
         self.d = 1
@@ -8,3 +8,6 @@ class TestClass:
 
     def funct2(self):
         return "jojo"
+
+def take_globals():
+    return globals()

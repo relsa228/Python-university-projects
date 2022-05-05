@@ -1,55 +1,43 @@
+import math
+
 from packages_dir.serialize_modules.json_serialize_module import JsonSerializer
 from packages_dir.serialize_modules.toml_serialize_module import TomlSerializer
 from packages_dir.serialize_modules.yaml_serialize_module import YamlSerializer
-from test_files.test_fie import TestClass
+from packages_dir.serialize_modules.serialize_factory import SerializeFactory
 
-ffd = {'d': {'g': 1}}
-ff = """
-def govno(self):
-    return 2+1
-"""
+from test_files.funct_file import f
+from test_files.funct_file import take_globals as tg2
 
-# my_tree = ast.parse(ff)
-# ii = ast.walk(my_tree)
-# strin = ast_to_string_for_dict(my_tree)
+test_list = ['1', '2', '3']
+test_tuple = ('1', '2', '3')
+test_dict = {'1': 1, '2': 2, '3': 3}
+
+class TestClassS:
+    def __init__(self):
+        self.s = "d"
+        self.d = 1
+
+    def funct1(self):
+        return 2+1
+
+    def funct2(self):
+        return "jojo"
+
+if __name__ == '__main__':
+    json_s = SerializeFactory.create_serializer("json")
+    toml_s = SerializeFactory.create_serializer("toml")
+    yaml_s = SerializeFactory.create_serializer("yaml")
+
+    test_item = TestClassS()
+    print("Tests:")
+    print("1. JSON tests:")
+    print("\nClass serialize: ")
+    json_s.dump(TestClassS, "results/ForClass.json", globals())
+    print(" " + str(json_s.load("results/ForClass.json", globals())))
+    print("\n\nClass object: ")
+    jj = TestClassS()
+    json_s.dump(jj, "results/ForObject.json", globals())
+    print(" " + str(json_s.load("results/ForObject.json", globals())))
 
 
-# dic = eval(normilize_string(strin))
-# print(json.dumps(dic))
-# my_oo = ast.parse(normilize_string(strin))
 
-
-# print(ast.unparse(my_tree))
-# print(ast.unparse(my_oo))
-
-ser = JsonSerializer()
-#ser.dump(TestClass, "results/ForClass.json")
-
-serr = TomlSerializer()
-#serr.dump(TestClass, "results/ForClass.toml")
-
-serrr = YamlSerializer()
-#serrr.dump(TestClass, "results/ForClass.yml")
-
-#tc = TestClass()
-#ser.dump(TestClass, "results/ForObject.json")
-#serr.dump(TestClass, "results/ForObject.toml")
-#serrr.dump(TestClass, "results/ForObject.yml")
-
-#test_list = ["aaa", "bbb", "ccc"]
-#ser.dump(test_list, "results/ForList.json")
-#serr.dump(test_list, "results/ForList.toml")
-#serrr.dump(test_list, "results/ForList.yml")
-
-#test_tuple = ("fff", "111", "999")
-#ser.dump(test_tuple, "results/ForTuple.json")
-#serr.dump(test_tuple, "results/ForTuple.toml")
-#serrr.dump(test_tuple, "results/ForTuple.yml")
-
-#test_dict = {'nnn': 1234, 'molchat': "doma", 'eee': 413}
-#ser.dump(test_dict, "results/ForDict.json")
-#serr.dump(test_dict, "results/ForDict.toml")
-#serrr.dump(test_dict, "results/ForDict.yml")
-
-mmm = serrr.load("results/ForDict.yml")
-print(mmm)
