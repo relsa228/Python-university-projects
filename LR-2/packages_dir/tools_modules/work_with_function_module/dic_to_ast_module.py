@@ -12,9 +12,9 @@ list_of_asts = ["Module", "Interactive", "Expression", "FunctionType", "Function
 
 
 def unparse_ast_str(unparse_ast: str):
-    '''
-    Перевод ast-словарь в форму, пригодную для инициализации заполнения узла
-    '''
+    """
+    Перевод ast-словаря в форму, пригодную для инициализации заполнения узла
+    """
     result_str = unparse_ast.replace(":", "=")
     result_str = result_str[2:]
     result_str = result_str[:len(result_str) - 1]
@@ -67,9 +67,9 @@ def unparse_ast_str(unparse_ast: str):
 
 
 def set_dot_ast(unparse_ast: str):
-    '''
-    Добавляет ast. перед узлами дерева
-    '''
+    """
+    Добавляет 'ast.' перед узлами дерева
+    """
     wrk_list_of_asts = set(list_of_asts)
     unparse_ast = "ast." + unparse_ast
     for i in wrk_list_of_asts:
@@ -79,9 +79,9 @@ def set_dot_ast(unparse_ast: str):
 
 
 def close_all_brekets(inpt_str: str):
-    '''
+    """
     Закрывает скобки
-    '''
+    """
     start_index = 0
     for _ in range(0, inpt_str.count('(')):
         current_index = inpt_str.find('(', start_index)
@@ -104,9 +104,9 @@ def close_all_brekets(inpt_str: str):
 
 
 def del_figure_braket(inpt_str: str):
-    '''
+    """
     Удаление остатков фигурных скобок из строки
-    '''
+    """
     start_index = 0
     for _ in range(0, inpt_str.count('{')):
         current_index = inpt_str.find('{', start_index)

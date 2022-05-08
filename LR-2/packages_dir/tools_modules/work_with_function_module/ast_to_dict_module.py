@@ -2,9 +2,9 @@ import ast
 
 
 def ast_to_dict(ast_node) -> str:
-    '''
+    """
     Переводит ast узел в словарь
-    '''
+    """
     wrk_str = ast.dump(ast_node)
     wrk_str = wrk_str.replace('=', ':')
     wrk_str = wrk_str.replace('(', ":{")
@@ -33,9 +33,9 @@ def ast_to_dict(ast_node) -> str:
 
 
 def close_all_brekets(inpt_str: str) -> str:
-    '''
+    """
     Закрывает открытые скобки (для поиска списков)
-    '''
+    """
     start_index = 0
     for _ in range(0, inpt_str.count('[')):
         current_index = inpt_str.find('[', start_index)
@@ -64,9 +64,9 @@ def close_all_brekets(inpt_str: str) -> str:
 
 
 def add_quotes(inpt_str: str) -> str:
-    '''
+    """
     Названия ast полей берутся в кавычки
-    '''
+    """
     i = 0
     while True:
         if i == len(inpt_str):

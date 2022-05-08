@@ -3,9 +3,9 @@ import types
 
 
 def get_function_name(unparse_str: str) -> str:
-    '''
+    """
     Получение названия функции
-    '''
+    """
     result = ""
     for i in range(4, len(unparse_str)):
         if unparse_str[i] == '(':
@@ -14,9 +14,9 @@ def get_function_name(unparse_str: str) -> str:
 
 
 def unparsed_funct(inpt_ast: str):
-    '''
+    """
     Перевод разименованной ast-строки в дерево
-    '''
+    """
     ss = eval(inpt_ast)
     ast.fix_missing_locations(ss)
     unparse_ast = ast.unparse(ss)
@@ -24,9 +24,9 @@ def unparsed_funct(inpt_ast: str):
 
 
 def return_compiled_function(new_str: str, globals_main):
-    '''
+    """
     Возвращает рабочую функцию
-    '''
+    """
     unparse = unparsed_funct(new_str)
     ast_node = ast.parse(unparse)
     code = compile(ast_node, '<ast>', mode="exec")

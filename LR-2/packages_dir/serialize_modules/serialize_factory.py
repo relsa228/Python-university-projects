@@ -7,9 +7,9 @@ class SerializeFactory:
 
     @staticmethod
     def create_serializer(name_of_serializer: str) -> object:
-        '''
+        """
         Возвращает сериализатор по имени формата
-        '''
+        """
         lw_name = name_of_serializer.lower()
         if lw_name == "json":
             return JsonSerializer()

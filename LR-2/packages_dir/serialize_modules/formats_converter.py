@@ -7,10 +7,11 @@ to_yaml_serializer = SerializeFactory.create_serializer('yaml')
 to_json_serializer = SerializeFactory.create_serializer('json')
 
 
-def transfer_to_another_format(input_file: str, input_file_format: str, output_file_format: str, globals_from_main: dict) -> bool:
-    '''
+def transfer_to_another_format(input_file: str, input_file_format: str, output_file_format: str,
+                               globals_from_main: dict) -> bool:
+    """
     Конвертирует один формат сериализации в другой
-    '''
+    """
     if output_file_format.lower() == 'yaml':
         if input_file_format.lower() == 'toml' and 'toml' in input_file:
             with open(input_file, 'r') as file:
@@ -27,10 +28,9 @@ def transfer_to_another_format(input_file: str, input_file_format: str, output_f
             return True
 
         elif input_file_format.lower() == 'yaml' and 'yaml' in input_file:
-            print('same_format')
             return True
-        else:
-            return False
+
+        return False
 
     elif output_file_format.lower() == 'toml':
         if input_file_format.lower() == 'yaml' and 'yaml' in input_file:
@@ -48,10 +48,9 @@ def transfer_to_another_format(input_file: str, input_file_format: str, output_f
             return True
 
         elif input_file_format.lower() == 'toml' and 'toml' in input_file:
-            print('same_format')
             return True
-        else:
-            return False
+
+        return False
 
     elif output_file_format.lower() == 'json':
         if input_file_format.lower() == 'toml' and 'toml' in input_file:
@@ -68,9 +67,6 @@ def transfer_to_another_format(input_file: str, input_file_format: str, output_f
                 to_json_serializer.dump(restored_class_yaml, file, globals_from_main)
             return True
         elif input_file_format.lower() == 'json' and 'json' in input_file:
-            print('same_format')
             return True
-        else:
-            return False
-    else:
-        print('not implemented format')
+
+        return False

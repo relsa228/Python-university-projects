@@ -1,13 +1,14 @@
-class TestClassS:
-    def __init__(self):
-        self.s = "d"
-        self.d = 1
+class ClassForTest:
+    def __init__(self, string: str, num: int):
+        self.string = string
+        self.num = num
 
     def funct1(self):
-        return 2+1
+        return self.num
 
     def funct2(self):
-        return "jojo"
+        return self.num
+
 
 def take_globals():
     return globals()
