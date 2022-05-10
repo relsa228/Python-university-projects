@@ -1,7 +1,7 @@
 import ast
 import inspect
 
-from packages_dir.tools_modules.work_with_function_module.ast_to_dict_module import ast_to_dict
+from relsa_serializer.tools_modules.work_with_function_module.ast_to_dict_module import ast_to_dict
 
 
 def serialize_to_dict(obj: object, globals_from_main: dict) -> dict:

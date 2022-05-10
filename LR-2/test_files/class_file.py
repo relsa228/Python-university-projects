@@ -4,7 +4,7 @@ class ClassForTest:
         self.num = num
 
     def funct1(self):
-        return self.num
+        return self.string
 
     def funct2(self):
         return self.num

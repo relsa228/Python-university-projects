@@ -1,4 +1,4 @@
-from packages_dir.serialize_modules.serialize_factory import SerializeFactory
+from relsa_serializer.serialize_modules.serialize_factory import SerializeFactory
 
 from test_files.class_file import ClassForTest
 from test_files.class_file import take_globals as tg1
@@ -15,7 +15,7 @@ def test_for_yaml():
     yaml_s = SerializeFactory.create_serializer("yaml")
     test_item = ClassForTest("Strochka", 256)
 
-    print("3. YAML tests:")
+    print("\n3. YAML tests:")
     print("\n1) For class:\n\t• Class serialize input: ", ClassForTest)
     yaml_s.dump(ClassForTest, "results/ForClass.yaml", tg1())
     print("\t• Class serialize output: " + str(yaml_s.load("results/ForClass.yaml", tg1())))

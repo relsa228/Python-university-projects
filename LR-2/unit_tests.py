@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from packages_dir.serialize_modules.formats_converter import transfer_to_another_format
+from relsa_serializer.serialize_modules.formats_converter import transfer_to_another_format
 
 from test_files.class_file import ClassForTest
 from test_files.class_file import take_globals as tg1
@@ -9,9 +9,9 @@ from test_files.class_file import take_globals as tg1
 from test_files.funct_file import f
 from test_files.funct_file import take_globals as tg2
 
-from packages_dir.serialize_modules.serialize_factory import SerializeFactory
-from packages_dir.tools_modules.convert_to_universal_format import serialize_to_dict
-from packages_dir.tools_modules.return_to_normal_form import deserialize_from_dict
+from relsa_serializer.serialize_modules.serialize_factory import SerializeFactory
+from relsa_serializer.tools_modules.convert_to_universal_format import serialize_to_dict
+from relsa_serializer.tools_modules.return_to_normal_form import deserialize_from_dict
 
 test_list = ['1', '2', '3']
 test_tuple = ('1', '2', '3')
@@ -151,14 +151,14 @@ class TestClass(unittest.TestCase):
         self.assertEqual(restored_test_tuple_json, test_tuple)
 
     def test_change_formats(self):
-        self.assertTrue(transfer_to_another_format('results/ForObject.toml', 'toml', 'yaml', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.json', 'json', 'yaml', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.yaml', 'yaml', 'yaml', globals()))
+        self.assertTrue(transfer_to_another_format("results/ForObject.toml", "toml", "results/transfer/ObjectTomlYaml", "yaml"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.json", "json", "results/transfer/ObjectJsonYaml", "yaml"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.yaml", "yaml", "results/transfer/ObjectYamlYaml", "yaml"))
 
-        self.assertTrue(transfer_to_another_format('results/ForObject.yaml', 'yaml', 'toml', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.json', 'json', 'toml', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.toml', 'toml', 'toml', globals()))
+        self.assertTrue(transfer_to_another_format("results/ForObject.yaml", "yaml", "results/transfer/ObjectYamlToml", "toml"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.json", "json", "results/transfer/ObjectJsonToml", "toml"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.toml", "toml", "results/transfer/ObjectTomlToml", "toml"))
 
-        self.assertTrue(transfer_to_another_format('results/ForObject.yaml', 'yaml', 'json', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.toml', 'toml', 'json', globals()))
-        self.assertTrue(transfer_to_another_format('results/ForObject.json', 'json', 'json', globals()))
+        self.assertTrue(transfer_to_another_format("results/ForObject.yaml", "yaml", "results/transfer/ObjectYamlJson", "json"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.toml", "toml", "results/transfer/ObjectTomlJson", "json"))
+        self.assertTrue(transfer_to_another_format("results/ForObject.json", "json", "results/transfer/ObjectJsonJson", "json"))

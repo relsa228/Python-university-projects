@@ -1,4 +1,5 @@
-from packages_dir.serialize_modules.serialize_factory import SerializeFactory
+from relsa_serializer.serialize_modules.serialize_factory import SerializeFactory
+
 
 from test_files.class_file import ClassForTest
 from test_files.class_file import take_globals as tg1
@@ -15,7 +16,7 @@ def test_for_json():
     json_s = SerializeFactory.create_serializer("json")
     test_item = ClassForTest("Strochka", 256)
 
-    print("1. JSON tests:")
+    print("\n1. JSON tests:")
     print("\n1) For class:\n\t• Class serialize input: ", ClassForTest)
     json_s.dump(ClassForTest, "results/ForClass.json", tg1())
     print("\t• Class serialize output: " + str(json_s.load("results/ForClass.json", tg1())))

@@ -1,6 +1,6 @@
-from packages_dir.serialize_modules.json_serialize_module import JsonSerializer
-from packages_dir.serialize_modules.toml_serialize_module import TomlSerializer
-from packages_dir.serialize_modules.yaml_serialize_module import YamlSerializer
+from relsa_serializer.serialize_modules.json_serialize_module import JsonSerializer
+from relsa_serializer.serialize_modules.toml_serialize_module import TomlSerializer
+from relsa_serializer.serialize_modules.yaml_serialize_module import YamlSerializer
 
 
 class SerializeFactory:

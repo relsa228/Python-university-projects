@@ -1,8 +1,8 @@
 import ast
 
-from packages_dir.serialize_modules.abstractserializer import AbstractSerializer
-from packages_dir.tools_modules.convert_to_universal_format import serialize_to_dict
-from packages_dir.tools_modules.return_to_normal_form import deserialize_from_dict
+from relsa_serializer.serialize_modules.abstractserializer import AbstractSerializer
+from relsa_serializer.tools_modules.convert_to_universal_format import serialize_to_dict
+from relsa_serializer.tools_modules.return_to_normal_form import deserialize_from_dict
 
 
 class JsonSerializer(AbstractSerializer):

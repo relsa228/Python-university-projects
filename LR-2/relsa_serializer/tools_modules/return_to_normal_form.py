@@ -1,6 +1,6 @@
-from packages_dir.tools_modules.work_with_function_module.dic_to_ast_module import unparse_ast_str
-from packages_dir.tools_modules.work_with_function_module.unserialize_funct_module import return_compiled_function
-from packages_dir.tools_modules.work_with_function_module.unserialize_funct_module import unparsed_funct
+from relsa_serializer.tools_modules.work_with_function_module.dic_to_ast_module import unparse_ast_str
+from relsa_serializer.tools_modules.work_with_function_module.unserialize_funct_module import return_compiled_function
+from relsa_serializer.tools_modules.work_with_function_module.unserialize_funct_module import unparsed_funct
 
 
 def deserialize_from_dict(incoming_dict: dict, globals_from_main) -> object:
