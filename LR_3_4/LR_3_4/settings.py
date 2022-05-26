@@ -65,12 +65,16 @@ WSGI_APPLICATION = 'LR_3_4.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+MONGODB_DATABASES = {
+    "default": {
+        "name": 'borso',
+        "password": 'anisya',
+        "username": '_relsa',
+        "tz_aware": True, # if you using timezones in django (USE_TZ = True)
+    },
 }
+
+INSTALLED_APPS += ["django_mongoengine"]
 
 
 # Password validation
