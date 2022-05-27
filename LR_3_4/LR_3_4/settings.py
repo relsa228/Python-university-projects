@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -65,16 +66,15 @@ WSGI_APPLICATION = 'LR_3_4.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-MONGODB_DATABASES = {
-    "default": {
-        "name": 'borso',
-        "password": 'anisya',
-        "username": '_relsa',
-        "tz_aware": True, # if you using timezones in django (USE_TZ = True)
-    },
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'Borsa',
+        'CLIENT': {
+            'host': 'mongodb+srv://relsa:4m74woMQv27vf3B9@borsa.ised6.mongodb.net/test',
+        }
+    }
 }
-
-INSTALLED_APPS += ["django_mongoengine"]
 
 
 # Password validation
