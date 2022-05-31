@@ -1,0 +1,17 @@
+.btn {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  width: 200px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.btn:hover {
+  background-color: rgba(0, 0, 0, 0.87);
+  color: #dcdcdc;
+}
+
+.container {
+  max-width: 960px;
+}

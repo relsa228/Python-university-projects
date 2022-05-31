@@ -1,0 +1,90 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block divs %}
+    <div class="table-responsive" style="width: 100%">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Тикер</th>
+              <th scope="col">Доступно</th>
+              <th scope="col">В долларах США</th>
+              <th scope="col">Доход по счёту</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/bitcoin-btc-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  BTC
+              </td>
+              <td>1232 $</td>
+              <td>+2.42 %</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/ethereum-eth-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  ETH
+              </td>
+              <td>4334 $</td>
+              <td>-3.12 %</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/litecoin-ltc-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  LTC
+              </td>
+              <td>741 $</td>
+              <td>+1.12 %</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/x.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  XRP
+              </td>
+              <td>11 $</td>
+              <td>+1.7 %</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/z.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  ZEC
+              </td>
+              <td>13 $</td>
+              <td>+7 %</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/d.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  DASH
+              </td>
+              <td>89 $</td>
+              <td>-12 %</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>USD</td>
+              <td>12.000$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+{% endblock %}
