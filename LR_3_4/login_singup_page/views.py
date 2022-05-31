@@ -1,22 +1,22 @@
-from django.shortcuts import render
-from .forms import UsersForm
-from .models import Users
+from django.shortcuts import render, redirect
+from .forms import RegUsersForm, LogUsersForm
+from django.contrib.auth.views import LoginView
+from django.views.generic.edit import CreateView
 
 
-def login(request):
-    return render(request, 'login_singup_page/login_page.html')
+def email_aprove(request):
+    return render(request, 'login_singup_page/email_aprove_page.html')
 
 
-def registration(request):
-    if request.method == "POST":
-        user_form_save = UsersForm(request.POST)
-        if user_form_save.is_valid():
-            user_form_save.save()
-        else:
-            print(user_form_save.errors)
+class RegistrationView(CreateView):
+    success_url = 'email_aprove/'
+    form_class = RegUsersForm
+    template_name = 'login_singup_page/reg_page.html'
 
-    user_form = UsersForm()
-    data = {
-        'forms': user_form
-    }
-    return render(request, 'login_singup_page/reg_page.html', data)
+
+class CustLoginView(LoginView):
+    form_class = LogUsersForm
+    template_name = 'login_singup_page/login_page.html'
+
+    def get_success_url(self):
+        return '/./user/'

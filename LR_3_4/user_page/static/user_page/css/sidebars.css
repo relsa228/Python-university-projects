@@ -57,3 +57,11 @@ main {
 .scrollarea {
   overflow-y: auto;
 }
+
+.nav-link:active {
+  background-color: rgba(83, 83, 83, 0.18);
+}
+
+.nav-pills .nav-link.active {
+  background-color: rgba(83,83,83,0.45);
+}

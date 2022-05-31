@@ -32,54 +32,42 @@
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">Имя</label>
-                        {{ forms.first_name }}
-                        <div class="invalid-feedback">
-                            Данные некорректны
+                        {{ form.first_name }}
+                        <div class = 'form-error'>{{ form.first_name.errors }}</div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="lastName" class="form-label">Фамилия</label>
+                        {{ form.last_name }}
+                        <div class = 'form-error'>{{ form.last_name.errors }}</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="username" class="form-label">Имя пользователя</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            {{ form.username }}
                         </div>
+                        <div class = 'form-error'>{{ form.username.errors }}</div>
                     </div>
 
-                <div class="col-sm-6">
-                    <label for="lastName" class="form-label">Фамилия</label>
-                    {{ forms.last_name }}
-                    <div class="invalid-feedback">
-                        Данные некорректны
+                    <div class="col-12">
+                        <label for="email" class="form-label">Email<span class="text-muted"></span></label>
+                        {{ form.email }}
+                        <div class = 'form-error'>{{ form.email.errors }}</div>
                     </div>
-                </div>
 
-                <div class="col-12">
-                    <label for="username" class="form-label">Никнейм</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text">@</span>
-                        {{ forms.nickname }}
-                        <div class="invalid-feedback">
-                            Данные некорректны
-                        </div>
+                    <div class="col-sm-6">
+                        <div class="form-label">Пароль</div>
+                        {{ form.password1 }}
+                        <div class = 'form-error'>{{ form.password1.errors }}</div>
+                        <div class = 'form-error'>{{ form.password2.errors }}</div>
                     </div>
-                </div>
 
-                <div class="col-12">
-                    <label for="email" class="form-label">Email <span class="text-muted"></span></label>
-                    {{ forms.email }}
-                    <div class="invalid-feedback">
-                        Формат адреса электронной почты некорректен
+                    <div class="col-sm-6">
+                        <div class="form-label">Повторите пароль</div>
+                        {{ form.password2 }}
                     </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="address" class="form-label">Адрес</label>
-                    {{ forms.adress }}
-                    <div class="invalid-feedback">
-                        Введите актуальный адрес
-                    </div>
-                </div>
-
-                <div class="col-md-5">
-                    <label for="country" class="form-label">Страна</label>
-                    {{ forms.country }}
-                    <div class="invalid-feedback">
-                        Выберите одну из предложенных стран
-                    </div>
-                </div>
               </div>
               <hr class="my-4">
               <button class="w-100 btn" type="submit" style="width: 20%">Зарегестрироваться</button>

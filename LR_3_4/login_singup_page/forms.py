@@ -1,12 +1,12 @@
-from .models import Users
-from django.forms import ModelForm, TextInput, ChoiceField, Select
+from django.forms import TextInput, PasswordInput
+import django.contrib.auth.forms as auth_form
+import django.contrib.auth.models as auth_model
 
 
-class UsersForm(ModelForm):
+class RegUsersForm(auth_form.UserCreationForm):
     class Meta:
-        model = Users
-
-        fields = ['first_name', 'last_name', 'nickname', 'email', 'adress', 'country']
+        model = auth_model.User
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
         widgets = {
             'first_name': TextInput(attrs={
                 'class': 'form-control',
@@ -22,11 +22,11 @@ class UsersForm(ModelForm):
                 'placeholder': 'Фамилия',
                 'required': True
             }),
-            'nickname': TextInput(attrs={
+            'username': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'text',
                 'id': 'username',
-                'placeholder': 'Никнейм',
+                'placeholder': 'Имя пользователя',
                 'required': True
             }),
             'email': TextInput(attrs={
@@ -36,18 +36,34 @@ class UsersForm(ModelForm):
                 'placeholder': 'you@example.com',
                 'required': True
             }),
-            'adress': TextInput(attrs={
+            'password1': PasswordInput(attrs={
                 'class': 'form-control',
-                'type': 'text',
-                'id': 'address',
-                'placeholder': 'Адрес',
+                'type': 'password',
+                'id': 'password1',
                 'required': True
             }),
-            'country': TextInput(attrs={
+            'password2': PasswordInput(attrs={
                 'class': 'form-control',
-                'type': 'text',
-                'id': 'country',
-                'placeholder': 'Страна',
+                'type': 'password',
+                'id': 'password2',
                 'required': True
             }),
         }
+
+
+class LogUsersForm(auth_form.AuthenticationForm):
+    fields = ['username', 'password']
+    widgets = {
+        'username': TextInput(attrs={
+            'class': 'form-control',
+            'id': 'floatingInput',
+            'placeholder': 'Имя пользователя',
+            'required': True
+        }),
+        'password': PasswordInput(attrs={
+            'class': 'form-control',
+            'type': 'password',
+            'id': 'floatingPassword',
+            'required': True
+        }),
+    }

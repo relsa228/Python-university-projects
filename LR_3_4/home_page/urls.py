@@ -4,6 +4,7 @@ from login_singup_page import views as login_views
 
 urlpatterns = [
     path('', views.index),
-    path('login/', login_views.login),
-    path('reg/', login_views.registration)
+    path('logout/', views.logout_user),
+    path('login/', login_views.CustLoginView.as_view(), name='login'),
+    path('reg/', login_views.RegistrationView.as_view(), name='register')
 ]
