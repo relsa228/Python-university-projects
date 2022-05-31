@@ -69,9 +69,9 @@ WSGI_APPLICATION = 'LR_3_4.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'Borsa',
+        'NAME': 'borsa_database',
         'CLIENT': {
-            'host': 'mongodb+srv://relsa:4m74woMQv27vf3B9@borsa.ised6.mongodb.net/test',
+            'host': 'mongodb+srv://relsa:q3bOrTmvSuNOn0JR@borsamaincluster.qekltrd.mongodb.net/test',
         }
     }
 }

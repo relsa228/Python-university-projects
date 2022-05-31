@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 
 
 def index(request):
-    print(requests.get(url="https://api.exmo.com/v1.1/ticker/").text)
+    #print(requests.get(url="https://api.exmo.com/v1.1/ticker/").text)
     return render(request, 'home_page/index.html')
 
 
