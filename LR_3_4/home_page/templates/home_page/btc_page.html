@@ -1,0 +1,87 @@
+{%extends "home_page/index.html" %}
+{% load static %}
+
+{% block overyiew_table_data %}
+<tr>
+  <td>BTC</td>
+  <td>{{ btc_sell }} $</td>
+  <td>{{ btc_buy }} $</td>
+  <td>{{ btc_price_6 }} $</td>
+  <td>{{ btc_date_6 }}</td>
+</tr>
+<tr>
+  <td>ETH</td>
+  <td>4334 $</td>
+  <td>-3.12 %</td>
+</tr>
+<tr>
+  <td>LTC</td>
+  <td>741 $</td>
+  <td>+1.12 %</td>
+</tr>
+<tr>
+  <td>XRP</td>
+  <td>11 $</td>
+  <td>+1.7 %</td>
+</tr>
+<tr>
+  <td>ZEC</td>
+  <td>13 $</td>
+  <td>+7 %</td>
+</tr>
+<tr>
+  <td>DASH</td>
+  <td>89 $</td>
+  <td>-12 %</td>
+</tr>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ btc_date_0 }}',
+        '{{ btc_date_1 }}',
+        '{{ btc_date_2 }}',
+        '{{ btc_date_3 }}',
+        '{{ btc_date_4 }}',
+        '{{ btc_date_5 }}',
+        '{{ btc_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ btc_price_0 }},
+            {{ btc_price_1 }},
+            {{ btc_price_2 }},
+            {{ btc_price_3 }},
+            {{ btc_price_4 }},
+            {{ btc_price_5 }},
+            {{ btc_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}
