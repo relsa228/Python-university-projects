@@ -1,2 +1,56 @@
 {%extends "home_page/index.html" %}
 {% load static %}
+
+{% block name_of_table %}
+    <h1 class="h2">Котировки ETH/USD</h1>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ eth_date_0 }}',
+        '{{ eth_date_1 }}',
+        '{{ eth_date_2 }}',
+        '{{ eth_date_3 }}',
+        '{{ eth_date_4 }}',
+        '{{ eth_date_5 }}',
+        '{{ eth_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ eth_price_0 }},
+            {{ eth_price_1 }},
+            {{ eth_price_2 }},
+            {{ eth_price_3 }},
+            {{ eth_price_4 }},
+            {{ eth_price_5 }},
+            {{ eth_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '{{ current_color }}',
+        borderWidth: 4,
+        pointBackgroundColor: '{{ current_color }}'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}

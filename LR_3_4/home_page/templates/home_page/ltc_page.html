@@ -1,2 +1,56 @@
 {%extends "home_page/index.html" %}
 {% load static %}
+
+{% block name_of_table %}
+    <h1 class="h2">Котировки LTC/USD</h1>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ ltc_date_0 }}',
+        '{{ ltc_date_1 }}',
+        '{{ ltc_date_2 }}',
+        '{{ ltc_date_3 }}',
+        '{{ ltc_date_4 }}',
+        '{{ ltc_date_5 }}',
+        '{{ ltc_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ ltc_price_0 }},
+            {{ ltc_price_1 }},
+            {{ ltc_price_2 }},
+            {{ ltc_price_3 }},
+            {{ ltc_price_4 }},
+            {{ ltc_price_5 }},
+            {{ ltc_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '{{ current_color }}',
+        borderWidth: 4,
+        pointBackgroundColor: '{{ current_color }}'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}

@@ -20,3 +20,7 @@ def wallet(request):
 
 def profile(request):
     return render(request, 'user_page/profile.html')
+
+
+def edit(request):
+    return render(request, 'user_page/redact_profile.html')

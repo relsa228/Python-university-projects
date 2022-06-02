@@ -48,10 +48,10 @@
         <strong>{{ request.user.username }}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="/user">Profile</a></li>
+        <li><a class="dropdown-item" href="/user">Профиль</a></li>
+        <li><a class="dropdown-item" href="/user/edit_profile">Настройки</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
       </ul>
     </div>
   {% endif %}
@@ -147,7 +147,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Котировки</h1>
+        {% block name_of_table %}{% endblock %}
       </div>
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
@@ -165,7 +165,48 @@
             </tr>
           </thead>
           <tbody>
-            {% block overyiew_table_data %}{% endblock %}
+            <tr>
+              <td>BTC</td>
+              <td>{{ btc_sell }} $</td>
+              <td>{{ btc_buy }} $</td>
+              <td>{{ btc_avg }} $</td>
+              <td>{{ btc_date }}</td>
+            </tr>
+            <tr>
+              <td>ETH</td>
+              <td>{{ eth_sell }} $</td>
+              <td>{{ eth_buy }} $</td>
+              <td>{{ eth_avg }} $</td>
+              <td>{{ eth_date }}</td>
+            </tr>
+            <tr>
+              <td>LTC</td>
+              <td>{{ ltc_sell }} $</td>
+              <td>{{ ltc_buy }} $</td>
+              <td>{{ ltc_avg }} $</td>
+              <td>{{ ltc_date }}</td>
+            </tr>
+            <tr>
+              <td>XRP</td>
+              <td>{{ xrp_sell }} $</td>
+              <td>{{ xrp_buy }} $</td>
+              <td>{{ xrp_avg }} $</td>
+              <td>{{ xrp_date }}</td>
+            </tr>
+            <tr>
+              <td>ZEC</td>
+              <td>{{ zec_sell }} $</td>
+              <td>{{ zec_buy }} $</td>
+              <td>{{ zec_avg }} $</td>
+              <td>{{ zec_date }}</td>
+            </tr>
+            <tr>
+              <td>DASH</td>
+              <td>{{ dash_sell }} $</td>
+              <td>{{ dash_buy }} $</td>
+              <td>{{ dash_avg }} $</td>
+              <td>{{ dash_date }}</td>
+            </tr>
           </tbody>
         </table>
       </div>

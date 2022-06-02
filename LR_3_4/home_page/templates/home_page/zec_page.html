@@ -1,2 +1,54 @@
 {%extends "home_page/index.html" %}
 {% load static %}
+
+{% block name_of_table %}
+    <h1 class="h2">Котировки ZEC/USD</h1>
+{% endblock %}
+
+{% block script %}
+<script>
+  const ctx = document.getElementById('myChart')
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ zec_date_0 }}',
+        '{{ zec_date_1 }}',
+        '{{ zec_date_2 }}',
+        '{{ zec_date_3 }}',
+        '{{ zec_date_4 }}',
+        '{{ zec_date_5 }}',
+        '{{ zec_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ zec_price_0 }},
+            {{ zec_price_1 }},
+            {{ zec_price_2 }},
+            {{ zec_price_3 }},
+            {{ zec_price_4 }},
+            {{ zec_price_5 }},
+            {{ zec_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '{{ current_color }}',
+        borderWidth: 4,
+        pointBackgroundColor: '{{ current_color }}'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}

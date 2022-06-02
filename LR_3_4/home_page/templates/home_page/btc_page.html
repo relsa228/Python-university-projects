@@ -1,39 +1,8 @@
 {%extends "home_page/index.html" %}
 {% load static %}
 
-{% block overyiew_table_data %}
-<tr>
-  <td>BTC</td>
-  <td>{{ btc_sell }} $</td>
-  <td>{{ btc_buy }} $</td>
-  <td>{{ btc_price_6 }} $</td>
-  <td>{{ btc_date_6 }}</td>
-</tr>
-<tr>
-  <td>ETH</td>
-  <td>4334 $</td>
-  <td>-3.12 %</td>
-</tr>
-<tr>
-  <td>LTC</td>
-  <td>741 $</td>
-  <td>+1.12 %</td>
-</tr>
-<tr>
-  <td>XRP</td>
-  <td>11 $</td>
-  <td>+1.7 %</td>
-</tr>
-<tr>
-  <td>ZEC</td>
-  <td>13 $</td>
-  <td>+7 %</td>
-</tr>
-<tr>
-  <td>DASH</td>
-  <td>89 $</td>
-  <td>-12 %</td>
-</tr>
+{% block name_of_table %}
+    <h1 class="h2">Котировки BTC/USD</h1>
 {% endblock %}
 
 {% block script %}
@@ -65,9 +34,9 @@
         ],
         lineTension: 0,
         backgroundColor: 'transparent',
-        borderColor: '#007bff',
+        borderColor: '{{ current_color }}',
         borderWidth: 4,
-        pointBackgroundColor: '#007bff'
+        pointBackgroundColor: '{{ current_color }}'
       }]
     },
     options: {

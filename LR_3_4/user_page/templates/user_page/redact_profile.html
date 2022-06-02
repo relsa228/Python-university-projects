@@ -1,0 +1,64 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block includes %}
+    <link href="{% static 'user_page/css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'user_page/css/edit_profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block divs %}
+<main>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-12">
+                <img class="rounded-circle" id = 'avatar' src="{% static 'user_page/img/ava.jpg' %}" alt="">
+            </div>
+
+            <div class="col-6">
+                <label for="firstName" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.first_name }}>
+            </div>
+
+            <div class="col-6">
+                <label for="lastName" class="form-label">Фамилия</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.last_name }}>
+            </div>
+
+            <div class="col-6">
+                <label for="username" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.username }}>
+            </div>
+
+            <div class="col-6">
+                <label for="email" class="form-label">Email<span class="text-muted"></span></label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.email }}>
+            </div>
+
+            <hr class="my-4">
+            <h2>Изменить пароль</h2>
+
+            <div class="col-9">
+                <label for="firstName" class="form-label">Старый пароль</label>
+                <input type="text" class="form-control" id="firstName">
+            </div>
+
+            <div class="col-9">
+                <label for="lastName" class="form-label">Новый пароль</label>
+                <input type="text" class="form-control" id="firstName">
+            </div>
+
+            <div class="col-9">
+                <label for="lastName" class="form-label">Подтвердите пароль</label>
+                <input type="text" class="form-control" id="firstName">
+            </div>
+
+            <div class="container justify-content-center">
+            <button class="btn" type="submit" id="aprove_btn">Сохранить</button>
+            <button class="btn" type="reset" id="cancele_btn">Отменить</button>
+            </div>
+
+        </div>
+    </form>
+</main>
+{% endblock %}

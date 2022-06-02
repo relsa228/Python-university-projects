@@ -7,35 +7,35 @@
 
 {% block divs %}
 <main>
-    <form method="post">
-        {% csrf_token %}
-        <div class="row g-3">
-            <div class="col-12">
-                <img class="rounded-circle" id = 'avatar' src="{% static 'user_page/img/ava.jpg' %}" alt="">
-            </div>
 
-            <div class="col-6">
-                <label for="firstName" class="form-label">Имя</label>
-                <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.first_name }}>
-            </div>
+    <div class="row g-3">
+        <div class="col-12">
+            <img class="rounded-circle" id = 'avatar' src="{% static 'user_page/img/ava.jpg' %}" alt="">
+        </div>
 
-            <div class="col-6">
-                <label for="lastName" class="form-label">Фамилия</label>
-                <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.last_name }}>
-            </div>
+        <div class="col-6">
+            <label for="firstName" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.first_name }}>
+        </div>
 
-            <div class="col-6">
-                <label for="username" class="form-label">Имя пользователя</label>
-                <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.username }}>
-            </div>
+        <div class="col-6">
+            <label for="lastName" class="form-label">Фамилия</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.last_name }}>
+        </div>
 
-            <div class="col-6">
-                <label for="email" class="form-label">Email<span class="text-muted"></span></label>
-                <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.email }}>
-            </div>
+        <div class="col-6">
+            <label for="username" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.username }}>
+        </div>
+
+        <div class="col-6">
+            <label for="email" class="form-label">Email<span class="text-muted"></span></label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.email }}>
+        </div>
       </div>
       <hr class="my-4">
-      <button class="btn" type="submit">Редактировать</button>
-    </form>
+      <form action="/user/edit_profile">
+            <button class="btn" href="/edit_profile">Редактировать</button>
+      </form>
 </main>
 {% endblock %}

@@ -1,2 +1,56 @@
 {%extends "home_page/index.html" %}
 {% load static %}
+
+{% block name_of_table %}
+    <h1 class="h2">Котировки DASH/USD</h1>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ dash_date_0 }}',
+        '{{ dash_date_1 }}',
+        '{{ dash_date_2 }}',
+        '{{ dash_date_3 }}',
+        '{{ dash_date_4 }}',
+        '{{ dash_date_5 }}',
+        '{{ dash_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ dash_price_0 }},
+            {{ dash_price_1 }},
+            {{ dash_price_2 }},
+            {{ dash_price_3 }},
+            {{ dash_price_4 }},
+            {{ dash_price_5 }},
+            {{ dash_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '{{ current_color }}',
+        borderWidth: 4,
+        pointBackgroundColor: '{{ current_color }}'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}

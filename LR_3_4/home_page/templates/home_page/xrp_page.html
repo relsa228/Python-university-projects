@@ -1,2 +1,56 @@
 {%extends "home_page/index.html" %}
 {% load static %}
+
+{% block name_of_table %}
+    <h1 class="h2">Котировки XRP/USD</h1>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        '{{ xrp_date_0 }}',
+        '{{ xrp_date_1 }}',
+        '{{ xrp_date_2 }}',
+        '{{ xrp_date_3 }}',
+        '{{ xrp_date_4 }}',
+        '{{ xrp_date_5 }}',
+        '{{ xrp_date_6 }}',
+      ],
+      datasets: [{
+        data: [
+            {{ xrp_price_0 }},
+            {{ xrp_price_1 }},
+            {{ xrp_price_2 }},
+            {{ xrp_price_3 }},
+            {{ xrp_price_4 }},
+            {{ xrp_price_5 }},
+            {{ xrp_price_6 }},
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '{{ current_color }}',
+        borderWidth: 4,
+        pointBackgroundColor: '{{ current_color }}'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+</script>
+{% endblock %}
