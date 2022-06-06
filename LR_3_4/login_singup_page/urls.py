@@ -4,5 +4,5 @@ from . import views as log_reg_views
 
 urlpatterns = [
     path('user/', user_views.profile),
-    path('reg/email_aprove/', log_reg_views.email_aprove)
+    path('reg/email_aprove', log_reg_views.email_aprove),
 ]

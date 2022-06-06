@@ -11,6 +11,7 @@ class BTC(models.Model):
     def __str__(self):
         return self.ticket
 
+
 class ETH(models.Model):
     ticket = models.TextField("Тикет")
     current_buy_price = models.TextField("Цена покупки")

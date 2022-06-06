@@ -2,25 +2,25 @@ from .models import BTC, ETH, LTC, ZEC, DASH, XRP
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
-bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
-
 green_color = "#228B22"
 red_color = "#8B0000"
 
 
 def index(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_btc_prices = []
     for el in bitcoin_quore:
         list_of_btc_prices.append(el.current_sell_price)
 
     list_of_btc_date = []
     for el in bitcoin_quore:
-        list_of_btc_date.append(str(el.date)[5:-9])
+        list_of_btc_date.append(str(el.date)[5:-16])
 
     if list_of_btc_prices[5] < list_of_btc_prices[6]:
         current_color = green_color
@@ -46,32 +46,32 @@ def index(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
@@ -80,13 +80,20 @@ def index(request):
 
 
 def eth_overview(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_eth_prices = []
     for el in ether_quore:
         list_of_eth_prices.append(el.avg_price)
 
     list_of_eth_date = []
     for el in ether_quore:
-        list_of_eth_date.append(str(el.date)[5:-9])
+        list_of_eth_date.append(str(el.date)[5:-16])
 
     if list_of_eth_prices[5] < list_of_eth_prices[6]:
         current_color = green_color
@@ -112,32 +119,32 @@ def eth_overview(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
@@ -146,13 +153,20 @@ def eth_overview(request):
 
 
 def ltc_overview(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_ltc_prices = []
     for el in litecoin_quore:
         list_of_ltc_prices.append(el.avg_price)
 
     list_of_ltc_date = []
     for el in litecoin_quore:
-        list_of_ltc_date.append(str(el.date)[5:-9])
+        list_of_ltc_date.append(str(el.date)[5:-16])
 
     if list_of_ltc_prices[5] < list_of_ltc_prices[6]:
         current_color = green_color
@@ -178,32 +192,32 @@ def ltc_overview(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
@@ -212,13 +226,20 @@ def ltc_overview(request):
 
 
 def xrp_overview(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_xrp_prices = []
     for el in ripple_quore:
         list_of_xrp_prices.append(el.avg_price)
 
     list_of_xrp_date = []
     for el in ripple_quore:
-        list_of_xrp_date.append(str(el.date)[5:-9])
+        list_of_xrp_date.append(str(el.date)[5:-16])
 
     if list_of_xrp_prices[5] < list_of_xrp_prices[6]:
         current_color = green_color
@@ -244,32 +265,32 @@ def xrp_overview(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
@@ -278,13 +299,20 @@ def xrp_overview(request):
 
 
 def dash_overview(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_dash_prices = []
     for el in dash_quore:
         list_of_dash_prices.append(el.avg_price)
 
     list_of_dash_date = []
     for el in dash_quore:
-        list_of_dash_date.append(str(el.date)[5:-9])
+        list_of_dash_date.append(str(el.date)[5:-16])
 
     if list_of_dash_prices[5] < list_of_dash_prices[6]:
         current_color = green_color
@@ -310,32 +338,32 @@ def dash_overview(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
@@ -344,13 +372,20 @@ def dash_overview(request):
 
 
 def zec_overview(request):
+    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
+    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
+    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
+    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
+    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
+    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+
     list_of_zec_prices = []
     for el in zcash_quore:
         list_of_zec_prices.append(el.avg_price)
 
     list_of_zec_date = []
     for el in zcash_quore:
-        list_of_zec_date.append(str(el.date)[5:-9])
+        list_of_zec_date.append(str(el.date)[5:-16])
 
     if list_of_zec_prices[5] < list_of_zec_prices[6]:
         current_color = green_color
@@ -376,32 +411,32 @@ def zec_overview(request):
 
         'btc_buy': bitcoin_quore[6].current_buy_price,
         'btc_sell': bitcoin_quore[6].current_sell_price,
-        'btc_date': str(bitcoin_quore[6].date)[5:-9],
+        'btc_date': str(bitcoin_quore[6].date)[5:-16],
         'btc_avg': bitcoin_quore[6].avg_price,
 
         'eth_buy': ether_quore[6].current_buy_price,
         'eth_sell': ether_quore[6].current_sell_price,
-        'eth_date': str(ether_quore[6].date)[5:-9],
+        'eth_date': str(ether_quore[6].date)[5:-16],
         'eth_avg': ether_quore[6].avg_price,
 
         'ltc_buy': litecoin_quore[6].current_buy_price,
         'ltc_sell': litecoin_quore[6].current_sell_price,
-        'ltc_date': str(litecoin_quore[6].date)[5:-9],
+        'ltc_date': str(litecoin_quore[6].date)[5:-16],
         'ltc_avg': litecoin_quore[6].avg_price,
 
         'xrp_buy': ripple_quore[6].current_buy_price,
         'xrp_sell': ripple_quore[6].current_sell_price,
-        'xrp_date': str(ripple_quore[6].date)[5:-9],
+        'xrp_date': str(ripple_quore[6].date)[5:-16],
         'xrp_avg': ripple_quore[6].avg_price,
 
         'zec_buy': zcash_quore[6].current_buy_price,
         'zec_sell': zcash_quore[6].current_sell_price,
-        'zec_date': str(zcash_quore[6].date)[5:-9],
+        'zec_date': str(zcash_quore[6].date)[5:-16],
         'zec_avg': zcash_quore[6].avg_price,
 
         'dash_buy': dash_quore[6].current_buy_price,
         'dash_sell': dash_quore[6].current_sell_price,
-        'dash_date': str(dash_quore[6].date)[5:-9],
+        'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
         'current_color': current_color
