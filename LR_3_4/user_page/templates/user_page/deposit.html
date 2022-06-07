@@ -1,13 +1,69 @@
 {%extends "user_page/index.html" %}
+{% load static %}
 
+{% block includes %}
+    <link href="{% static 'user_page/css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'user_page/css/deposit.css' %}" rel="stylesheet">
+{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block divs %}
+<main>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <h2>Купить крипту</h2>
 
-</body>
-</html>
+            <div class="col-12">
+                <label for="firstName" class="form-label">Тикер</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.first_name }}>
+            </div>
+
+            <div class="col-12">
+                <label for="lastName" class="form-label">Количество токенов</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.last_name }}>
+            </div>
+
+            <div class="container justify-content-center">
+                <button class="btn" type="submit" id="aprove_btn">Провести операцию</button>
+            </div>
+        </div>
+    </form>
+    <hr class="my-4">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <h2>Продать крипту</h2>
+
+            <div class="col-12">
+                <label for="firstName" class="form-label">Тикер</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.first_name }}>
+            </div>
+
+            <div class="col-12">
+                <label for="lastName" class="form-label">Количество токенов</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.last_name }}>
+            </div>
+
+            <div class="container justify-content-center">
+                <button class="btn" type="submit" id="aprove_btn">Провести операцию</button>
+            </div>
+        </div>
+    </form>
+    <hr class="my-4">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <h2 class="justify-content-center">Положить на счёт</h2>
+
+            <div class="col-12">
+                <label for="lastName" class="form-label">Сумма</label>
+                <input type="text" class="form-control" id="firstName" value={{ request.user.last_name }}>
+            </div>
+
+            <div class="container justify-content-center">
+                <button class="btn" type="submit" id="aprove_btn">Провести операцию</button>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

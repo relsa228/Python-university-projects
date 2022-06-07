@@ -2,17 +2,14 @@ from .models import BTC, ETH, LTC, ZEC, DASH, XRP
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
+from .utils import get_current_data
+
 green_color = "#228B22"
 red_color = "#8B0000"
 
 
 def index(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_btc_prices = []
     for el in bitcoin_quore:
@@ -80,12 +77,7 @@ def index(request):
 
 
 def eth_overview(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_eth_prices = []
     for el in ether_quore:
@@ -153,12 +145,7 @@ def eth_overview(request):
 
 
 def ltc_overview(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_ltc_prices = []
     for el in litecoin_quore:
@@ -226,12 +213,7 @@ def ltc_overview(request):
 
 
 def xrp_overview(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_xrp_prices = []
     for el in ripple_quore:
@@ -299,12 +281,7 @@ def xrp_overview(request):
 
 
 def dash_overview(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_dash_prices = []
     for el in dash_quore:
@@ -372,12 +349,7 @@ def dash_overview(request):
 
 
 def zec_overview(request):
-    bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
-    ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
-    litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
-    ripple_quore = XRP.objects.all()[XRP.objects.count() - 7:]
-    zcash_quore = ZEC.objects.all()[ZEC.objects.count() - 7:]
-    dash_quore = DASH.objects.all()[DASH.objects.count() - 7:]
+    bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_zec_prices = []
     for el in zcash_quore:

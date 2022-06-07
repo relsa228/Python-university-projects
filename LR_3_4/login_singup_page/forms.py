@@ -64,6 +64,7 @@ class LogUsersForm(auth_form.AuthenticationForm):
             'class': 'form-control',
             'type': 'password',
             'id': 'floatingPassword',
+            'placeholder': 'Пароль',
             'required': True
         }),
     }
