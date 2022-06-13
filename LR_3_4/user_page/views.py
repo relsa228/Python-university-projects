@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
+from .models import UserUsdAcc, UserCryptoAcc
+from home_page.models import BTC, ETH, ZEC, DASH, LTC, XRP
 
-from .forms import RedactForm
+from .forms import RedactForm, UsdDepositForm, CryptoForm
 from .utils import get_wallets, get_profit
 
 
@@ -12,7 +14,77 @@ class RedactUserView(CreateView):
 
 
 def deposit(request):
-    return render(request, 'user_page/deposit.html')
+    if request.method == "POST":
+        result = UsdDepositForm(request.POST)
+        user_acc = UserUsdAcc.objects.get(username=request.user.username)
+        user_acc.usd_count = float(user_acc.usd_count) + float(result.data["usd_count"])
+        user_acc.save()
+    data = {
+        "usd_deposit_form": UsdDepositForm
+    }
+    return render(request, 'user_page/deposit.html', data)
+
+
+def buy(request):
+    if request.method == "POST":
+        result = CryptoForm(request.POST)
+        user_acc = UserCryptoAcc.objects.get(username=request.user.username, crypto_ticker=result.data["crypto_ticker"])
+        user_usd_acc = UserUsdAcc.objects.get(username=request.user.username)
+        current_price = 0
+        match result.data["crypto_ticker"]:
+            case "BTC":
+                current_price = BTC.objects.last().current_buy_price
+            case "ETH":
+                current_price = ETH.objects.last().current_buy_price
+            case "LTC":
+                current_price = LTC.objects.last().current_buy_price
+            case "XRP":
+                current_price = XRP.objects.last().current_buy_price
+            case "ZEC":
+                current_price = ZEC.objects.last().current_buy_price
+            case "DASH":
+                current_price = DASH.objects.last().current_buy_price
+        if float(current_price) * float(result.data["token_count"]) <= float(user_usd_acc.usd_count):
+            user_acc.token_count = float(user_acc.token_count) + float(result.data["token_count"])
+            user_acc.usd_in = float(user_acc.usd_in) + float(current_price) * float(result.data["token_count"])
+            user_usd_acc.usd_count = float(user_usd_acc.usd_count) - (float(current_price) * float(result.data["token_count"]))
+            user_acc.save()
+            user_usd_acc.save()
+    data = {
+        "crypto_buy_form": CryptoForm
+    }
+    return render(request, 'user_page/crypto_buy.html', data)
+
+
+def sell(request):
+    if request.method == "POST":
+        result = CryptoForm(request.POST)
+        user_acc = UserCryptoAcc.objects.get(username=request.user.username, crypto_ticker=result.data["crypto_ticker"])
+        user_usd_acc = UserUsdAcc.objects.get(username=request.user.username)
+        current_price = 0
+        match result.data["crypto_ticker"]:
+            case "BTC":
+                current_price = BTC.objects.last().current_buy_price
+            case "ETH":
+                current_price = ETH.objects.last().current_buy_price
+            case "LTC":
+                current_price = LTC.objects.last().current_buy_price
+            case "XRP":
+                current_price = XRP.objects.last().current_buy_price
+            case "ZEC":
+                current_price = ZEC.objects.last().current_buy_price
+            case "DASH":
+                current_price = DASH.objects.last().current_buy_price
+        if float(user_acc.token_count) >= float(result.data["token_count"]):
+            user_acc.token_count = float(user_acc.token_count) - float(result.data["token_count"])
+            user_acc.usd_in = float(user_acc.usd_in) - float(current_price) * float(result.data["token_count"])
+            user_usd_acc.usd_count = float(user_usd_acc.usd_count) + (float(current_price) * float(result.data["token_count"]))
+            user_acc.save()
+            user_usd_acc.save()
+    data = {
+        "crypto_buy_form": CryptoForm
+    }
+    return render(request, 'user_page/crypto_sell.html', data)
 
 
 def wallet(request):

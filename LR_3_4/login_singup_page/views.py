@@ -3,7 +3,7 @@ from .forms import RegUsersForm, LogUsersForm
 from django.contrib.auth.views import LoginView
 from django.views.generic.edit import CreateView
 
-from .utils import create_user_crypto_bills
+from .utils import create_user_crypto_bills, create_user_usd_bill
 
 
 def email_aprove(request):
@@ -17,6 +17,7 @@ class RegistrationView(CreateView):
 
     def post(self, request):
         create_user_crypto_bills(request.POST["username"])
+        create_user_usd_bill(request.POST["username"])
         return super(RegistrationView, self).post(request)
 
 
