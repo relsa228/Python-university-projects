@@ -15,12 +15,15 @@
 
             <div class="col-12">
                 <label for="firstName" class="form-label">Пара</label>
-                {{ crypto_buy_form.crypto_ticker }}
+                {{ form.crypto_ticker }}
             </div>
 
             <div class="col-12">
                 <label for="lastName" class="form-label">Количество токенов</label>
-                {{ crypto_buy_form.token_count }}
+                {{ form.token_count }}
+                {% if request.POST.token_count == -1 %}
+                    <div class = 'form-error'>Jgthfwbz yt vj;tn ,snm ghjdtltyf</div>
+                {% endif %}
             </div>
 
             <div class="container justify-content-center">

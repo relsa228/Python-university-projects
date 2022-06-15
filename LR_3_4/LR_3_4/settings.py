@@ -1,4 +1,5 @@
 from pathlib import Path
+import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -105,8 +106,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -117,3 +116,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'borsanonreply@gmail.com'
+EMAIL_HOST_PASSWORD = 'yuD3aayGemUwMyB'
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+
+django_on_heroku.settings(locals())

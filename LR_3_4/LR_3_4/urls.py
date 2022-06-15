@@ -6,5 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_page.urls')),
     path('user/', include('user_page.urls')),
-    path('reg/email_aprove/', log_reg_views.email_aprove)
+    path('reg/email_aprove/', log_reg_views.EmalAprove.as_view())
 ]

@@ -1,7 +1,7 @@
-from .models import BTC, ETH, LTC, ZEC, DASH, XRP
-from django.shortcuts import render, redirect
 from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 
+from user_page.utils import get_avatar_link
 from .utils import get_current_data
 
 green_color = "#228B22"
@@ -11,12 +11,14 @@ red_color = "#8B0000"
 def index(request):
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
-    list_of_btc_prices = []
-    for el in bitcoin_quore:
-        list_of_btc_prices.append(el.current_sell_price)
+    imgur_link = ""
+    if request.user.username != "":
+        imgur_link = get_avatar_link(request.user.username)
 
+    list_of_btc_prices = []
     list_of_btc_date = []
     for el in bitcoin_quore:
+        list_of_btc_prices.append(el.current_sell_price)
         list_of_btc_date.append(str(el.date)[5:-16])
 
     if list_of_btc_prices[5] < list_of_btc_prices[6]:
@@ -71,20 +73,21 @@ def index(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/btc_page.html', data)
 
 
 def eth_overview(request):
+    imgur_link = get_avatar_link(request.user.username)
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_eth_prices = []
-    for el in ether_quore:
-        list_of_eth_prices.append(el.avg_price)
-
     list_of_eth_date = []
     for el in ether_quore:
+        list_of_eth_prices.append(el.avg_price)
         list_of_eth_date.append(str(el.date)[5:-16])
 
     if list_of_eth_prices[5] < list_of_eth_prices[6]:
@@ -139,20 +142,21 @@ def eth_overview(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/eth_page.html', data)
 
 
 def ltc_overview(request):
+    imgur_link = get_avatar_link(request.user.username)
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_ltc_prices = []
-    for el in litecoin_quore:
-        list_of_ltc_prices.append(el.avg_price)
-
     list_of_ltc_date = []
     for el in litecoin_quore:
+        list_of_ltc_prices.append(el.avg_price)
         list_of_ltc_date.append(str(el.date)[5:-16])
 
     if list_of_ltc_prices[5] < list_of_ltc_prices[6]:
@@ -207,20 +211,21 @@ def ltc_overview(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/ltc_page.html', data)
 
 
 def xrp_overview(request):
+    imgur_link = get_avatar_link(request.user.username)
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_xrp_prices = []
-    for el in ripple_quore:
-        list_of_xrp_prices.append(el.avg_price)
-
     list_of_xrp_date = []
     for el in ripple_quore:
+        list_of_xrp_prices.append(el.avg_price)
         list_of_xrp_date.append(str(el.date)[5:-16])
 
     if list_of_xrp_prices[5] < list_of_xrp_prices[6]:
@@ -275,20 +280,21 @@ def xrp_overview(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/xrp_page.html', data)
 
 
 def dash_overview(request):
+    imgur_link = get_avatar_link(request.user.username)
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_dash_prices = []
-    for el in dash_quore:
-        list_of_dash_prices.append(el.avg_price)
-
     list_of_dash_date = []
     for el in dash_quore:
+        list_of_dash_prices.append(el.avg_price)
         list_of_dash_date.append(str(el.date)[5:-16])
 
     if list_of_dash_prices[5] < list_of_dash_prices[6]:
@@ -343,20 +349,21 @@ def dash_overview(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/dash_page.html', data)
 
 
 def zec_overview(request):
+    imgur_link = get_avatar_link(request.user.username)
     bitcoin_quore, ether_quore, litecoin_quore, ripple_quore, zcash_quore, dash_quore = get_current_data()
 
     list_of_zec_prices = []
-    for el in zcash_quore:
-        list_of_zec_prices.append(el.avg_price)
-
     list_of_zec_date = []
     for el in zcash_quore:
+        list_of_zec_prices.append(el.avg_price)
         list_of_zec_date.append(str(el.date)[5:-16])
 
     if list_of_zec_prices[5] < list_of_zec_prices[6]:
@@ -411,7 +418,9 @@ def zec_overview(request):
         'dash_date': str(dash_quore[6].date)[5:-16],
         'dash_avg': dash_quore[6].avg_price,
 
-        'current_color': current_color
+        'current_color': current_color,
+
+        'imgur_link': imgur_link
     }
     return render(request, 'home_page/zec_page.html', data)
 

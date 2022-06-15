@@ -23,6 +23,7 @@ class UserUsdAcc(models.Model):
 class UsersAvatars(models.Model):
     username = models.TextField("Имя пользователя")
     imgur_link = models.TextField("Ссылка на аватарку")
+    imgur_link_small = models.TextField("Ссылка на миниатюру")
 
     def __str__(self):
         return self.username

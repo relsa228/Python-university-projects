@@ -1,10 +1,11 @@
-from urllib import request
+from email_validate import validate
 
 import django.contrib.auth.forms as auth_form
 import django.contrib.auth.models as auth_model
-from .models import UserUsdAcc, UserCryptoAcc
 from django import forms
-from django.forms import TextInput
+from django.forms import TextInput, FileInput
+
+from .models import UserUsdAcc, UserCryptoAcc, UsersAvatars
 
 TICKERS = [
     ('BTC', 'BTC_USD'),
@@ -25,8 +26,8 @@ class RedactForm(auth_form.UserChangeForm):
                 'class': 'form-control',
                 'type': 'text',
                 'id': 'firstName',
-                'value': 'th',
                 'placeholder': 'Имя',
+                'value': '',
                 'required': True
             }),
             'last_name': TextInput(attrs={
@@ -51,6 +52,24 @@ class RedactForm(auth_form.UserChangeForm):
                 'required': True
             }),
         }
+
+    def is_valid(self) -> bool:
+        error_dict = {"first_name_error": "", "last_name_error": "", "email_error": ""}
+        first_name, last_name, email = self.data["first_name"], self.data["last_name"], self.data["email"]
+
+        for symbol in first_name:
+            if not str.isalpha(symbol):
+                return False
+
+        for symbol in last_name:
+            if not str.isalpha(symbol):
+                return False
+
+        if not validate(email_address=email, check_format=True, check_blacklist=True, check_dns=True, dns_timeout=10,
+                        check_smtp=False, smtp_debug=False):
+            return False
+
+        return True
 
 
 class UsdDepositForm(forms.ModelForm):
@@ -77,3 +96,15 @@ class CryptoForm(forms.ModelForm):
             }),
 
             'crypto_ticker': forms.Select(choices=TICKERS)}
+
+
+class UserAvatarForm(forms.ModelForm):
+    class Meta:
+        model = UsersAvatars
+        fields = ["imgur_link"]
+        widgets = {
+            'imgur_link': FileInput(attrs={
+                'class': 'form-control',
+                'type': 'file',
+                'id': 'avatar',
+            })}
