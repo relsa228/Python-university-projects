@@ -76,6 +76,8 @@ def buy_sell_helper(username, result):
 
 
 def buy_crypto(username, result) -> bool:
+    if float(result.data["token_count"]) <= 0:
+        return False
     user_acc, user_usd_acc, current_price = buy_sell_helper(username, result)
     if float(current_price) * float(result.data["token_count"]) <= float(user_usd_acc.usd_count):
         user_acc.token_count = float(user_acc.token_count) + float(result.data["token_count"])
@@ -90,6 +92,8 @@ def buy_crypto(username, result) -> bool:
 
 
 def sell_crypto(username, result) -> bool:
+    if float(result.data["token_count"]) <= 0:
+        return False
     user_acc, user_usd_acc, current_price = buy_sell_helper(username, result)
     if float(user_acc.token_count) >= float(result.data["token_count"]):
         user_acc.token_count = float(user_acc.token_count) - float(result.data["token_count"])

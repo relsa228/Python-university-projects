@@ -68,7 +68,7 @@ def buy(request):
         "error_msg": error_msg,
         "imgur_link": imgur_link
     }
-    return render(request, 'user_page/crypto_sell.html', data)
+    return render(request, 'user_page/crypto_buy.html', data)
 
 
 def sell(request):
