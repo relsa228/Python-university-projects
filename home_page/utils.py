@@ -2,6 +2,7 @@ from .models import BTC, ETH, LTC, ZEC, DASH, XRP
 
 
 def get_current_data():
+
     bitcoin_quore = BTC.objects.all()[BTC.objects.count() - 7:]
     ether_quore = ETH.objects.all()[ETH.objects.count() - 7:]
     litecoin_quore = LTC.objects.all()[LTC.objects.count() - 7:]
