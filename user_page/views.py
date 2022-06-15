@@ -14,7 +14,6 @@ class RedactUserView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['imgur_link'] = get_avatar_link(self.request.user.username)
-
         return context
 
     def get_success_url(self):
