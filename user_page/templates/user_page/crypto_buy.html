@@ -21,9 +21,7 @@
             <div class="col-12">
                 <label for="lastName" class="form-label">Количество токенов</label>
                 {{ crypto_buy_form.token_count }}
-                {% if request.POST.token_count == -1 %}
-                    <div class = 'form-error'>Jgthfwbz yt vj;tn ,snm ghjdtltyf</div>
-                {% endif %}
+                <div class = 'form-error'>{{ error_msg }}</div>
             </div>
 
             <div class="container justify-content-center">
