@@ -45,9 +45,10 @@ class DepositView(CreateView):
 
     def post(self, request):
         result = UsdDepositForm(request.POST)
-        user_acc = UserUsdAcc.objects.get(username=request.user.username)
-        user_acc.usd_count = float(user_acc.usd_count) + float(result.data["usd_count"])
-        user_acc.save()
+        if float(result.data["usd_count"]) > 0:
+            user_acc = UserUsdAcc.objects.get(username=request.user.username)
+            user_acc.usd_count = float(user_acc.usd_count) + float(result.data["usd_count"])
+            user_acc.save()
 
         return super(DepositView, self).post(request)
 
@@ -83,7 +84,7 @@ def sell(request):
         else:
             error_msg = "Операция не может быть проведена"
     data = {
-        "crypto_buy_form": CryptoForm,
+        "crypto_sell_form": CryptoForm,
         "error_msg": error_msg,
         "imgur_link": imgur_link
     }
