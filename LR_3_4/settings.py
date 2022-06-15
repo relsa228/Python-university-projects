@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import django_on_heroku
 
@@ -41,6 +42,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+STATIC_URL = 'staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR,
+                           'static')  # для реального сервера, чтоб собрать всю статику приложений в одну папку
+STATICFILES_DIRS = [  # дополнительные папки со статикой
+    os.path.join(BASE_DIR, 'LR_3_4/static'),
 ]
 
 ROOT_URLCONF = 'LR_3_4.urls'
