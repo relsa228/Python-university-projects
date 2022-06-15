@@ -1,0 +1,53 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block includes %}
+    <link href="{% static 'user_page/css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'user_page/css/edit_profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block divs %}
+<main>
+    <form enctype="multipart/form-data" method="post" id="edit_form">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-12">
+                <img class="rounded-circle" id='avatar' src="{{ imgur_link }}" alt="">
+            </div>
+
+            <div class="col-6">
+                <label for="firstName" class="form-label">Имя</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="col-6">
+                <label for="lastName" class="form-label">Фамилия</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">Email<span class="text-muted"></span></label>
+                {{ form.email }}
+            </div>
+
+            <div class="col-12" style="display: flex; flex-flow: column wrap;">
+                <label for="avatar_edit" class="form-label">Фотография профиля</label>
+                <input type="file" id='avatar_edit' accept="image/*,image/jpeg">
+                {% if request.method == "POST" %}
+                    <div class = 'form-error'>• Проверьте введенные данные</div>
+                {% endif %}
+            </div>
+
+            <div class="container justify-content-center">
+                <button class="btn" type="submit" name="aprove_btn" id="aprove_btn">Сохранить</button>
+                <a class="btn main-button-medium fade-for-main-button" id="cancele_btn" href="/user/">Отменить</a>
+            </div>
+
+        </div>
+    </form>
+</main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_page/js/edit_avatar.js' %}"></script>
+{% endblock %}

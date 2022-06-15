@@ -1,0 +1,45 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.98.0">
+        <title>Registrate</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'login_singup_page/css/email_aprove_page.css' %}" rel="stylesheet">
+    </head>
+
+    <body class="bg-light">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4" src="{% static 'login_singup_page/img/emblm.png' %}" alt="" width="90" height="90">
+                <h2>Отлично! Процедура регистрации почти завершена</h2>
+                <p class="lead">Теперь проверьте пожалуйста вашу почту, вам должно было прийти письмо с дальнейшими
+                инструкциями (в случае, если письма нет, проверьте папку "Спам")</p>
+            </div>
+            <a class="nav-link px-3" href="/">
+                <button class="btn">На главную</button>
+            </a>
+        </main>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2022 Borsа</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

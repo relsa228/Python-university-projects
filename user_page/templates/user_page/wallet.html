@@ -1,0 +1,90 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block divs %}
+    <div class="table-responsive" style="width: 100%">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Тикер</th>
+              <th scope="col">Доступно</th>
+              <th scope="col">В долларах США</th>
+              <th scope="col">Доход по счёту</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/bitcoin-btc-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  BTC
+              </td>
+              <td>{{ btc_acc_count }}</td>
+              <td>{{ btc_acc_price }} $</td>
+              <td>{{ btc_profit }} %</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/ethereum-eth-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  ETH
+              </td>
+              <td>{{ eth_acc_count }}</td>
+              <td>{{ eth_acc_price }} $</td>
+              <td>{{ eth_profit }} %</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/litecoin-ltc-logo.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  LTC
+              </td>
+              <td>{{ ltc_acc_count }}</td>
+              <td>{{ ltc_acc_price }} $</td>
+              <td>{{ ltc_profit }} %</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/x.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  XRP
+              </td>
+              <td>{{ xrp_acc_count }}</td>
+              <td>{{ xrp_acc_price }} $</td>
+              <td>{{ xrp_profit }} %</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/z.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  ZEC
+              </td>
+              <td>{{ zec_acc_count }}</td>
+              <td>{{ zec_acc_price }} $</td>
+              <td>{{ zec_profit }} %</td>
+            </tr>
+            <tr>
+              <td>
+                  <img src="{% static 'home_page/img/d.svg' %}" alt="" width="20" height="20" style="margin-right: 5px">
+                  DASH
+              </td>
+              <td>{{ dash_acc_count }}</td>
+              <td>{{ dash_acc_price }} $</td>
+              <td>{{ dash_profit }} %</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>USD</td>
+              <td>{{ usd_acc }} $</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+{% endblock %}

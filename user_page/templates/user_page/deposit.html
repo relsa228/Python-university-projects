@@ -1,0 +1,27 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block includes %}
+    <link href="{% static 'user_page/css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'user_page/css/deposit.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block divs %}
+<main>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <h2 class="justify-content-center">Положить на счёт</h2>
+
+            <div class="col-12">
+                <label for="lastName" class="form-label">Сумма</label>
+                {{ form.usd_count }}
+            </div>
+
+            <div class="container justify-content-center">
+                <button class="btn" type="submit" id="aprove_btn" value="usd_deposit" >Провести операцию</button>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

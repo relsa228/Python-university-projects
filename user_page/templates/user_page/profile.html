@@ -1,0 +1,41 @@
+{%extends "user_page/index.html" %}
+{% load static %}
+
+{% block includes %}
+    <link href="{% static 'user_page/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block divs %}
+<main>
+
+    <div class="row g-3">
+        <div class="col-12">
+            <img class="rounded-circle" id = 'avatar' src="{{ imgur_link }}" alt="">
+        </div>
+
+        <div class="col-6">
+            <label for="firstName" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.first_name }}>
+        </div>
+
+        <div class="col-6">
+            <label for="lastName" class="form-label">Фамилия</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.last_name }}>
+        </div>
+
+        <div class="col-6">
+            <label for="username" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.username }}>
+        </div>
+
+        <div class="col-6">
+            <label for="email" class="form-label">Email<span class="text-muted"></span></label>
+            <input type="text" class="form-control" id="firstName" readonly="readonly" value={{ request.user.email }}>
+        </div>
+      </div>
+      <hr class="my-4">
+      <form action="/user/edit_profile">
+            <button class="btn" href="/edit_profile">Редактировать</button>
+      </form>
+</main>
+{% endblock %}
