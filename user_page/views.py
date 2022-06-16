@@ -1,4 +1,3 @@
-import requests
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 
