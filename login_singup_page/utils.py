@@ -1,7 +1,9 @@
-from user_page.models import UserCryptoAcc, UserUsdAcc, UsersAvatars
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
 import random
+import smtplib
+
+from user_page.models import UserCryptoAcc, UserUsdAcc, UsersAvatars
+from .models import VerificateUser
+from . import config as config
 
 
 def create_user_crypto_bills(username):
@@ -35,10 +37,35 @@ def create_avatar_link(username):
 
 
 def send_aprove_mail(email, username, first_name, last_name):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login(config.USER_EMAIL, config.USER_PASSWORD)
+
     code = random.randint(100000, 999999)
-    message = f"{first_name} {last_name},\n\nблагодарим вас за регистрацию на нашей бирже!\n\nВаш код подтверждения: {code}" \
-              f"\n\nС уважением, администрация Borsa"
-    send_mail(subject='Регистрация на бирже Borsa', message=message, from_email='borsanonreply@gmail.com', recipient_list=
-              [email], fail_silently=True)
+    message = f"{first_name} {last_name},\n\nСпасибо за регистрацию на нашей бирже! \n\nВаш код авторизации: " \
+              f"{code} \n\nС уважением, администрация Borsa".encode("utf8")
+
+    server.sendmail(config.USER_EMAIL, email, message)
+    server.quit()
+
+    new_user = VerificateUser(username=username, is_verificate=code)
+    new_user.save()
 
 
+def verificate_user(code) -> bool:
+    if VerificateUser.objects.filter(is_verificate=code).exists():
+        ver_user = VerificateUser.objects.get(is_verificate=code)
+        ver_user.is_verificate = "true"
+        ver_user.save()
+        return True
+    else:
+        return False
+
+
+def verifiction_check(username):
+    check = VerificateUser.objects.get(username=username)
+    if check.is_verificate == "true":
+        return True
+    else:
+        return False

@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tauknp*=-4-gqiuv#ofh-(2z#*3qec5uy+#anel_s#@6o$*^zy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -47,7 +47,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = os.path.join(PROJECT_ROOT, 'static')
 
-# Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
@@ -122,12 +121,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'borsanonreply@gmail.com'
-EMAIL_HOST_PASSWORD = 'yuD3aayGemUwMyB'
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
 
 django_on_heroku.settings(locals())

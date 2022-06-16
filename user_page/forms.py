@@ -54,7 +54,6 @@ class RedactForm(auth_form.UserChangeForm):
         }
 
     def is_valid(self) -> bool:
-        error_dict = {"first_name_error": "", "last_name_error": "", "email_error": ""}
         first_name, last_name, email = self.data["first_name"], self.data["last_name"], self.data["email"]
 
         for symbol in first_name:

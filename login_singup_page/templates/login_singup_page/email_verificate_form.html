@@ -24,12 +24,26 @@
         <main>
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4" src="{% static 'login_singup_page/img/emblm.png' %}" alt="" width="90" height="90">
-                <h2>Поздравляем! Процедура регистрации завершена</h2>
-                <p class="lead">Теперь вы можете перейти на главную страницу и войти в свой аккаунт.</p>
+                <h2>Отлично! Процедура регистрации почти завершена</h2>
+                <p class="lead">Теперь проверьте пожалуйста вашу почту, вам должно было прийти письмо с дальнейшими
+                инструкциями (в случае, если письма нет, проверьте папку "Спам")</p>
             </div>
-            <a class="nav-link px-3" href="/">
-                <button class="btn">На главную</button>
-            </a>
+            <form method="post">
+                {% csrf_token %}
+                <div class="col-12">
+                    {{ form.is_verificate }}
+                </div>
+
+                {% if request.method == "POST" %}
+                    <div class = 'form-error' style="color: red">К сожалению, код недействителен</div>
+                {% endif %}
+
+                <hr class="my-4">
+
+                <div class="col-12">
+                    <button class="w-100 btn" type="submit">Подтвердить</button>
+                </div>
+            </form>
         </main>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">

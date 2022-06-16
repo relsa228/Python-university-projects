@@ -1,6 +1,9 @@
 from django.forms import TextInput, PasswordInput
 import django.contrib.auth.forms as auth_form
 import django.contrib.auth.models as auth_model
+from django import forms
+
+from login_singup_page.models import VerificateUser
 
 
 class RegUsersForm(auth_form.UserCreationForm):
@@ -68,3 +71,24 @@ class LogUsersForm(auth_form.AuthenticationForm):
             'required': True
         }),
     }
+
+
+class VerificationForm(forms.ModelForm):
+    class Meta:
+        model = VerificateUser
+        fields = ['username', 'is_verificate']
+        widgets = {
+            'username': TextInput(attrs={
+                'class': 'form-control',
+                'id': 'username',
+                'placeholder': 'Имя пользователя',
+                'required': True
+            }),
+            'is_verificate': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+                'id': 'verification_code',
+                'placeholder': 'Код верификации',
+                'required': True
+            }),
+        }

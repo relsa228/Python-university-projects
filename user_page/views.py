@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 
@@ -10,6 +11,11 @@ class RedactUserView(CreateView):
     success_url = '/./user/'
     form_class = RedactForm
     template_name = 'user_page/redact_profile.html'
+    initial = {"first_name": 4}
+
+    def setup(self, request, *args, **kwargs):
+        self.form_class.Meta.widgets["first_name"].attrs["value"] = request.user.username
+        super().setup(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +25,7 @@ class RedactUserView(CreateView):
     def get_success_url(self):
         return '/./user/'
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         result = RedactForm(request.POST)
         avatar_pic = request.POST["aprove_btn"]
         upload_avatar(request.user.username, avatar_pic)
