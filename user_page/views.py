@@ -1,20 +1,18 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 
 from .forms import RedactForm, UsdDepositForm, CryptoForm
 from .models import UserUsdAcc
-from .utils import get_wallets, get_profit, buy_crypto, sell_crypto, edit_profile, upload_avatar, get_avatar_link
+from .utils import get_wallets, get_profit, buy_crypto, sell_crypto, get_avatar_link, RedactThread, AvatarThread
 
 
-class RedactUserView(CreateView):
+class RedactUserView(LoginRequiredMixin, CreateView):
+    login_url = '/./login/'
     success_url = '/./user/'
     form_class = RedactForm
     template_name = 'user_page/redact_profile.html'
-    initial = {"first_name": 4}
-
-    def setup(self, request, *args, **kwargs):
-        self.form_class.Meta.widgets["first_name"].attrs["value"] = request.user.username
-        super().setup(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,18 +25,21 @@ class RedactUserView(CreateView):
     def post(self, request, **kwargs):
         result = RedactForm(request.POST)
         avatar_pic = request.POST["aprove_btn"]
-        upload_avatar(request.user.username, avatar_pic)
+        if avatar_pic != "":
+            upload_avatar = AvatarThread(request.user.username, avatar_pic)
+            upload_avatar.run()
         if result.is_valid():
-            username, f_name, s_name, email = request.user.username, result.data["first_name"], result.data[
-                "last_name"], \
-                                              result.data["email"]
-            edit_profile(username, f_name, s_name, email)
+            username, first_name, last_name, email = request.user.username, result.data["first_name"], \
+                                                     result.data["last_name"], result.data["email"]
+            redaction = RedactThread(username, first_name, last_name, email)
+            redaction.run()
             return redirect("/./user/")
 
         return super(RedactUserView, self).post(request)
 
 
-class DepositView(CreateView):
+class DepositView(LoginRequiredMixin, CreateView):
+    login_url = '/./login/'
     form_class = UsdDepositForm
     template_name = 'user_page/deposit.html'
     success_url = '/./user/deposit'
@@ -48,7 +49,7 @@ class DepositView(CreateView):
         context['imgur_link'] = get_avatar_link(self.request.user.username)
         return context
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         result = UsdDepositForm(request.POST)
         if float(result.data["usd_count"]) > 0:
             user_acc = UserUsdAcc.objects.get(username=request.user.username)
@@ -58,6 +59,7 @@ class DepositView(CreateView):
         return super(DepositView, self).post(request)
 
 
+@login_required(login_url='/./login/')
 def buy(request):
     error_msg = ""
     imgur_link = get_avatar_link(request.user.username)
@@ -77,6 +79,7 @@ def buy(request):
     return render(request, 'user_page/crypto_buy.html', data)
 
 
+@login_required(login_url='/./login/')
 def sell(request):
     error_msg = ""
     imgur_link = get_avatar_link(request.user.username)
@@ -96,44 +99,8 @@ def sell(request):
     return render(request, 'user_page/crypto_sell.html', data)
 
 
-def wallet(request):
-    crypto_wallets, usd_wallet = get_wallets(request.user.username)
-    crypto_profit = get_profit(crypto_wallets)
-    imgur_link = get_avatar_link(request.user.username)
-
-    data = {
-        'btc_acc_count': crypto_wallets["BTC"].token_count,
-        'btc_acc_price': crypto_wallets["BTC"].usd_count,
-        'btc_profit': crypto_profit["BTC"],
-
-        'eth_acc_count': crypto_wallets["ETH"].token_count,
-        'eth_acc_price': crypto_wallets["ETH"].usd_count,
-        'eth_profit': crypto_profit["ETH"],
-
-        'xrp_acc_count': crypto_wallets["XRP"].token_count,
-        'xrp_acc_price': crypto_wallets["XRP"].usd_count,
-        'xrp_profit': crypto_profit["XRP"],
-
-        'zec_acc_count': crypto_wallets["ZEC"].token_count,
-        'zec_acc_price': crypto_wallets["ZEC"].usd_count,
-        'zec_profit': crypto_profit["ZEC"],
-
-        'ltc_acc_count': crypto_wallets["LTC"].token_count,
-        'ltc_acc_price': crypto_wallets["LTC"].usd_count,
-        'ltc_profit': crypto_profit["LTC"],
-
-        'dash_acc_count': crypto_wallets["DASH"].token_count,
-        'dash_acc_price': crypto_wallets["DASH"].usd_count,
-        'dash_profit': crypto_profit["DASH"],
-
-        'usd_acc': usd_wallet,
-
-        'imgur_link': imgur_link
-    }
-    return render(request, 'user_page/wallet.html', data)
-
-
-class ProfileView(CreateView):
+class ProfileView(LoginRequiredMixin, CreateView):
+    login_url = '/./login/'
     form_class = RedactForm
     template_name = 'user_page/profile.html'
 
@@ -143,7 +110,8 @@ class ProfileView(CreateView):
         return context
 
 
-class WalletView(CreateView):
+class WalletView(LoginRequiredMixin, CreateView):
+    login_url = '/./login/'
     form_class = RedactForm
     template_name = 'user_page/wallet.html'
 

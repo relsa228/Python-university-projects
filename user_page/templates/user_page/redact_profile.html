@@ -17,17 +17,20 @@
 
             <div class="col-6">
                 <label for="firstName" class="form-label">Имя</label>
-                {{ form.first_name }}
+                <input type="text" name="first_name" class="form-control" id="firstName" placeholder="Имя"
+                       value="{{ request.user.first_name }}" required maxlength="150">
             </div>
 
             <div class="col-6">
                 <label for="lastName" class="form-label">Фамилия</label>
-                {{ form.last_name }}
+                <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Фамилия"
+                       value="{{ request.user.last_name }}" required maxlength="150">
             </div>
 
             <div class="col-12">
                 <label for="email" class="form-label">Email<span class="text-muted"></span></label>
-                {{ form.email }}
+                <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com"
+                       value="{{ request.user.email }}" required maxlength="254">
             </div>
 
             <div class="col-12" style="display: flex; flex-flow: column wrap;">

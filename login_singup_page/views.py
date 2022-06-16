@@ -3,8 +3,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView
 
 from .forms import RegUsersForm, LogUsersForm, VerificationForm
-from .utils import create_user_crypto_bills, create_user_usd_bill, create_avatar_link, send_aprove_mail, \
-    verificate_user, verifiction_check
+from .utils import verificate_user, verifiction_check, EmailThread, CreateUserPropertiesThread
 
 
 class VerificationView(CreateView):
@@ -20,23 +19,21 @@ class VerificationView(CreateView):
             return super(VerificationView, self).post(request)
 
 
-def emal_aprove(request):
-    return render(request, 'login_singup_page/email_aprove_page.html')
-
-
 class RegistrationView(CreateView):
     success_url = 'verificate_email/'
     form_class = RegUsersForm
     template_name = 'login_singup_page/reg_page.html'
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         res_form = RegUsersForm(request.POST)
         if res_form.is_valid():
-            send_aprove_mail(request.POST["email"], request.POST["username"], request.POST["first_name"],
-                             request.POST["last_name"])
-            create_avatar_link(request.POST["username"])
-            create_user_crypto_bills(request.POST["username"])
-            create_user_usd_bill(request.POST["username"])
+            mail = EmailThread(request.POST["email"], request.POST["username"], request.POST["first_name"],
+                               request.POST["last_name"])
+            mail.run()
+
+            create_prop = CreateUserPropertiesThread(request.POST["username"])
+            create_prop.run()
+
             request.user.username = request.POST["username"]
 
         return super(RegistrationView, self).post(request)
@@ -55,3 +52,7 @@ class CustLoginView(LoginView):
             return redirect("/./login/")
 
         return super(CustLoginView, self).post(self, request, *args, **kwargs)
+
+
+def emal_aprove(request):
+    return render(request, 'login_singup_page/email_aprove_page.html')

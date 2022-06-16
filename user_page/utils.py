@@ -1,8 +1,31 @@
-from .models import UserCryptoAcc, UserUsdAcc, UsersAvatars
-from home_page.models import BTC, ETH, XRP, ZEC, LTC, DASH
+import threading
+
 from django.contrib.auth.models import User
-import io
-from PIL import Image
+
+from home_page.models import BTC, ETH, XRP, ZEC, LTC, DASH
+from .models import UserCryptoAcc, UserUsdAcc, UsersAvatars
+
+
+class AvatarThread(threading.Thread):
+    def __init__(self, username, link):
+        threading.Thread.__init__(self)
+        self.link = link
+        self.username = username
+
+    def run(self) -> None:
+        upload_avatar(self.username, self.link)
+
+
+class RedactThread(threading.Thread):
+    def __init__(self, username, first_name, last_name, email):
+        threading.Thread.__init__(self)
+        self.email = email
+        self.username = username
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def run(self) -> None:
+        edit_profile(self.username, self.first_name, self.last_name, self.email)
 
 
 def get_wallets(username):
@@ -107,10 +130,10 @@ def sell_crypto(username, result) -> bool:
     return False
 
 
-def edit_profile(username, f_name, s_name, email):
+def edit_profile(username, first_name, last_name, email):
     user = User.objects.get(username=username)
-    user.first_name = f_name
-    user.last_name = s_name
+    user.first_name = first_name
+    user.last_name = last_name
     user.email = email
     user.save()
 

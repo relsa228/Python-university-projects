@@ -1,9 +1,33 @@
 import random
 import smtplib
+import threading
 
 from user_page.models import UserCryptoAcc, UserUsdAcc, UsersAvatars
 from .models import VerificateUser
 from . import config as config
+
+
+class CreateUserPropertiesThread(threading.Thread):
+    def __init__(self, username):
+        threading.Thread.__init__(self)
+        self.username = username
+
+    def run(self) -> None:
+        create_user_crypto_bills(self.username)
+        create_user_usd_bill(self.username)
+        create_avatar_link(self.username)
+
+
+class EmailThread(threading.Thread):
+    def __init__(self, email, username, first_name, last_name):
+        threading.Thread.__init__(self)
+        self.email = email
+        self.username = username
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def run(self) -> None:
+        send_aprove_mail(self.email, self.username, self.first_name, self.last_name)
 
 
 def create_user_crypto_bills(username):
@@ -44,9 +68,10 @@ def send_aprove_mail(email, username, first_name, last_name):
 
     code = random.randint(100000, 999999)
     message = f"{first_name} {last_name},\n\nСпасибо за регистрацию на нашей бирже! \n\nВаш код авторизации: " \
-              f"{code} \n\nС уважением, администрация Borsa".encode("utf8")
+              f"{code}\n\nС уважением, администрация Borsa"
 
-    server.sendmail(config.USER_EMAIL, email, message)
+    send_message = 'Subject: {}\n\n{}'.format('Регистрация на бирже Borsa', message)
+    server.sendmail(config.USER_EMAIL, email, send_message.encode("utf8"))
     server.quit()
 
     new_user = VerificateUser(username=username, is_verificate=code)
@@ -63,7 +88,7 @@ def verificate_user(code) -> bool:
         return False
 
 
-def verifiction_check(username):
+def verifiction_check(username) -> bool:
     check = VerificateUser.objects.get(username=username)
     if check.is_verificate == "true":
         return True
